@@ -1,6 +1,8 @@
 ---
 title: "RMarkdown Practice"
-output: html_document
+output: 
+   html_document:
+      keep_md: yes
 ---
 
 ```{r setup, include=FALSE}
