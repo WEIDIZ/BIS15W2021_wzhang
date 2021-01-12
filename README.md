@@ -1,7 +1,8 @@
 # BIS15W2021_wzhang
 
-#Hi
+# Hi
+
 This is the repository of BIS15L by Weidi Zhang
 
-#Cantact Information
-[Weidi Zhang](mailto: wdizhang@ucdavis.edu)
+# Cantact Information
+[Weidi Zhang] (mailto: wdizhang@ucdavis.edu)
