@@ -5,5 +5,5 @@
 **This is the repository of BIS15L by Weidi Zhang**
 
 # Cantact Information
-[Weidi Zhang](mailto: wdizhang@ucdavis.edu)
-[Joel Ledford](mailto:jmledford@ucdavis.edu)  
+[Weidi Zhang](mailto:wdizhang@ucdavis.edu)
+
