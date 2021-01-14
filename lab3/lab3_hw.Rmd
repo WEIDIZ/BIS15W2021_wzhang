@@ -3,7 +3,7 @@ title: "Lab 3 Homework"
 author: "weidi zhang"
 date: "`r Sys.Date()`"
 output:
-  html_document:
+  html_document: 
     keep_md: YES
     theme: spacelab
     toc: no
@@ -99,6 +99,7 @@ mean(large$sleep_total)
 ```
 
 10. Which animal is the sleepiest among the entire dataframe?
+
 Little brown bat, sleep 19.9.
 ```{r}
 max(sleep$sleep_total)
