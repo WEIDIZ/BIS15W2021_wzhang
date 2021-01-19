@@ -1,7 +1,7 @@
 ---
 title: "Lab 3 Homework"
 author: "weidi zhang"
-date: "2021-01-15"
+date: "2021-01-18"
 output:
   html_document: 
     keep_md: YES
@@ -20,21 +20,19 @@ Make sure to use the formatting conventions of RMarkdown to make your report nea
 library(tidyverse)
 ```
 
-## Mammals Sleep
+## Mammals Sleep  
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 1. For this assignment, we are going to use built-in data on mammal sleep patterns. From which publication are these data taken from? Since the data are built-in you can use the help function in R.
 
 ```r
-install.packages('ggplot2')
-```
-
-```
-## Warning: package 'ggplot2' is in use and will not be installed
-```
-
-```r
-library(ggplot2)
+#install.packages('ggplot2')
+#library(ggplot2)
 data(msleep)
 ```
+</div>
 
 2. Store these data into a new data frame `sleep`.
 
@@ -98,7 +96,6 @@ table(sleep$vore)
 ##   carni   herbi insecti    omni 
 ##      19      32       5      20
 ```
-
 
 7. We are interested in two groups; small and large mammals. Let's define small as less than or equal to 1kg body weight and large as greater than or equal to 200kg body weight. Make two new dataframes (large and small) based on these parameters.
 
@@ -231,8 +228,6 @@ mean(average_l)
 ## [1] 1747.071
 ```
 
-
-
 9. Using a similar approach as above, do large or small animals sleep longer on average?  
 small animals
 
@@ -254,6 +249,7 @@ mean(large$sleep_total)
 ```
 
 10. Which animal is the sleepiest among the entire dataframe?
+
 Little brown bat, sleep 19.9.
 
 ```r
