@@ -51,7 +51,7 @@ library("janitor")
 
 The `clean_names` function takes care of everything in one line! Now that's a superpower!
 ```{r}
-#superhero_powers <- janitor::clean_names(superhero_powers)
+superhero_powers <- janitor::clean_names(superhero_powers)
 ```
 
 ## `tabyl`
