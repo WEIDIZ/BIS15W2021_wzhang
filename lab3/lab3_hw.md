@@ -1,7 +1,7 @@
 ---
 title: "Lab 3 Homework"
 author: "weidi zhang"
-date: "2021-01-18"
+date: "2021-01-24"
 output:
   html_document: 
     keep_md: YES
