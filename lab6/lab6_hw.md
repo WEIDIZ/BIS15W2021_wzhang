@@ -1,7 +1,7 @@
 ---
 title: "Lab 6 Homework"
 author: "Weidi Zhang"
-date: "2021-01-27"
+date: "2021-01-28"
 output:
   html_document:
     keep_md: yes
@@ -29,7 +29,7 @@ For this assignment we are going to work with a large data set from the [United 
 Load the data `FAO_1950to2012_111914.csv` as a new object titled `fisheries`.
 
 ```r
-fisheries <- readr::read_csv("FAO_1950to2012_111914.csv")
+fisheries <- readr::read_csv("data/FAO_1950to2012_111914.csv")
 ```
 
 ```
@@ -176,55 +176,6 @@ names(fisheries)
 fisheries <- janitor::clean_names(fisheries)
 ```
 
-```
-## Warning in FUN(X[[i]], ...): strings not representable in native encoding will
-## be translated to UTF-8
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00C4>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00D6>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00E4>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00F6>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00DF>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00C6>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00E6>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00D8>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00F8>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00C5>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00E5>' to native encoding
-```
-
 
 ```r
 fisheries$country <- as.factor(fisheries$country)
@@ -330,6 +281,10 @@ fisheries_tidy%>%
 ##              <int>
 ## 1             1551
 ```
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 
 6. Which country had the largest overall catch in the year 2000?
 
@@ -448,10 +403,12 @@ fisheries_tidy%>%
 ## 10 Sphyraena spp      ""      144
 ## # ... with 18,340 more rows
 ```
+</div>
 
 10. Use the data to do at least one analysis of your choice.
 
 Which country catch the most Sphyraena spp in 2010.
+
 Egypt
 
 ```r
