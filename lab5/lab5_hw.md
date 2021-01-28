@@ -1,7 +1,7 @@
 ---
 title: "Lab 5 Homework"
 author: "Weidi Zhang"
-date: "2021-01-22"
+date: "2021-01-26"
 output:
   html_document:
     keep_md: yes
@@ -67,55 +67,6 @@ superhero_powers <- readr::read_csv("data/super_hero_powers.csv", na = c("", "-9
 
 ```r
 superhero_info <- janitor::clean_names(superhero_info)
-```
-
-```
-## Warning in FUN(X[[i]], ...): strings not representable in native encoding will
-## be translated to UTF-8
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00C4>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00D6>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00E4>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00F6>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00DF>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00C6>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00E6>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00D8>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00F8>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00C5>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00E5>' to native encoding
 ```
 
 Yikes! `superhero_powers` has a lot of variables that are poorly named. We need some R superpowers...
@@ -402,6 +353,10 @@ good_guy%>%
 ## 3 Thor~ Female blue      Asga~ Blond         175 Marvel C~ <NA>       good     
 ## # ... with 1 more variable: weight <dbl>
 ```
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 
 8. Among the bad guys, who are the male humans over 200 inches in height?
 
@@ -426,6 +381,7 @@ bad_guy%>%
 ## 10 Kill~ Male   red       Meta~ No Hair       244 DC Comics green      bad      
 ## # ... with 12 more rows, and 1 more variable: weight <dbl>
 ```
+</div>
 
 9. OK, so are there more good guys or bad guys that are bald (personal interest)?
 
