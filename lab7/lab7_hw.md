@@ -1,7 +1,7 @@
 ---
 title: "Lab 7 Homework"
 author: "Please Add Your Name Here"
-date: "2021-02-02"
+date: "2021-02-03"
 output:
   
   html_document:
@@ -54,55 +54,6 @@ amniota <- readr::read_csv("data/amniota.csv")
 
 ```r
 amniota <- janitor::clean_names(amniota)
-```
-
-```
-## Warning in FUN(X[[i]], ...): strings not representable in native encoding will
-## be translated to UTF-8
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00C4>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00D6>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00E4>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00F6>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00DF>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00C6>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00E6>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00D8>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00F8>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00C5>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00E5>' to native encoding
 ```
 
 `amphibio` data:  
