@@ -1,7 +1,7 @@
 ---
 title: "Midterm 1"
 author: "Weidi Zhang"
-date: "2021-01-29"
+date: "2021-02-09"
 output:
   html_document:
     keep_md: yes
@@ -28,25 +28,28 @@ library(tidyverse)
 ## Questions
 **1. (2 points) Briefly explain how R, RStudio, and GitHub work together to make work flows in data science transparent and repeatable. What is the advantage of using RMarkdown in this context?**  
 
-
-R is an open source program language, and we use RStudio as its GUI. The code we wrote in R can be submitted and shared on GitHub. RMarkdown allowed us easily annotate codes, show results of analyses, and display graphs, while keep the format clean. It can also be outputted as many types of file, like html, and pdf.
+_R is an open source program language, and we use RStudio as its GUI. The code we wrote in R can be submitted and shared on GitHub. RMarkdown allowed us easily annotate codes, show results of analyses, and display graphs, while keep the format clean. It can also be outputted as many types of file, like html, and pdf._    
 
 **2. (2 points) What are the three types of `data structures` that we have discussed? Why are we using data frames for BIS 15L?**
 
-Data frames, matrices and vectors are the three types of data structures that we have discussed. In BIS15L, we use data frames most frequently because they allowed us to manipulate and visualize complex data with lots of varieties. Data frames are kind of like the combination of vectors and matrices, and keep their functions at the same time.
+_Data frames, matrices and vectors are the three types of data structures that we have discussed. In BIS15L, we use data frames most frequently because they allowed us to manipulate and visualize complex data with lots of varieties. Data frames are kind of like the combination of vectors and matrices, and keep their functions at the same time._
 
 In the midterm 1 folder there is a second folder called `data`. Inside the `data` folder, there is a .csv file called `ElephantsMF`. These data are from Phyllis Lee, Stirling University, and are related to Lee, P., et al. (2013), "Enduring consequences of early experiences: 40-year effects on survival and success among African elephants (Loxodonta africana)," Biology Letters, 9: 20130011. [kaggle](https://www.kaggle.com/mostafaelseidy/elephantsmf).  
 
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 **3. (2 points) Please load these data as a new object called `elephants`. Use the function(s) of your choice to get an idea of the structure of the data. Be sure to show the class of each variable.**
 
 ```r
-setwd("D:/GitHub Database/Course BIS15L/BIS15W2021_wzhang/midterm 1/Data")
-elephants <- readr::read_csv("ElephantsMF.csv")
+#setwd("D:/GitHub Database/Course BIS15L/BIS15W2021_wzhang/midterm 1/Data")
+elephants <- readr::read_csv("data/ElephantsMF.csv")
 ```
 
 ```
 ## 
-## -- Column specification --------------------------------------------------------
+## ── Column specification ────────────────────────────────────────────────────────
 ## cols(
 ##   Age = col_double(),
 ##   Height = col_double(),
@@ -59,7 +62,7 @@ str(elephants)
 ```
 
 ```
-## tibble [288 x 3] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+## spec_tbl_df [288 × 3] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
 ##  $ Age   : num [1:288] 1.4 17.5 12.8 11.2 12.7 ...
 ##  $ Height: num [1:288] 120 227 235 210 220 ...
 ##  $ Sex   : chr [1:288] "M" "M" "M" "M" ...
@@ -71,6 +74,9 @@ str(elephants)
 ##   .. )
 ```
 
+_If you use set_wd() in your code then it will only run on your computer. In order to get your code to run, I had to adjust the path._
+
+</div>
 
 **4. (2 points) Change the names of the variables to lower case and change the class of the variable `sex` to a factor.**
 
@@ -92,58 +98,6 @@ library(janitor)
 
 ```r
 elephants <- janitor::clean_names(elephants)
-```
-
-```
-## Warning in FUN(X[[i]], ...): strings not representable in native encoding will
-## be translated to UTF-8
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00C4>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00D6>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00E4>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00F6>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00DF>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00C6>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00E6>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00D8>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00F8>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00C5>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00E5>' to native encoding
-```
-
-```r
 head(elephants)
 ```
 
@@ -159,6 +113,7 @@ head(elephants)
 ## 6  12.7    189 M
 ```
 
+
 ```r
 elephants$sex <- as_factor(elephants$sex)
 class(elephants$sex)
@@ -168,9 +123,9 @@ class(elephants$sex)
 ## [1] "factor"
 ```
 
+**5. (2 points) How many male and female elephants are represented in the data?**  
 
-**5. (2 points) How many male and female elephants are represented in the data?**
-There are 138 male, and 150 female.
+_There are 138 males, and 150 females._
 
 ```r
 elephants%>%
@@ -180,13 +135,14 @@ elephants%>%
 ```
 ## # A tibble: 2 x 2
 ##   sex       n
-##   <fct> <int>
+## * <fct> <int>
 ## 1 M       138
 ## 2 F       150
 ```
 
-**6. (2 points) What is the average age all elephants in the data?**
-The average age of all elephants in this data is 10.97 years.
+**6. (2 points) What is the average age all elephants in the data?**  
+
+_The average age of all elephants in this data is 10.97 years._
 
 ```r
 elephants%>%
@@ -203,7 +159,7 @@ elephants%>%
 
 **7. (2 points) How does the average age and height of elephants compare by sex?**
 
-Female elephants have higher average age and height than male.
+_Female elephants have higher average age and height than male._
 
 ```r
 elephants%>%
@@ -213,13 +169,9 @@ elephants%>%
 ```
 
 ```
-## `summarise()` ungrouping output (override with `.groups` argument)
-```
-
-```
 ## # A tibble: 2 x 3
 ##   sex   mean_age mean_height
-##   <fct>    <dbl>       <dbl>
+## * <fct>    <dbl>       <dbl>
 ## 1 M         8.95        185.
 ## 2 F        12.8         190.
 ```
@@ -227,6 +179,7 @@ elephants%>%
 **8. (2 points) How does the average height of elephants compare by sex for individuals over 25 years old. Include the min and max height as well as the number of individuals in the sample as part of your analysis.**
 
 Male: 8 samples; mean=272.67, min=237.19, max=304.06
+
 Female: 25 samples; mean=232.74, min=206.07, max=277.8
 
 ```r
@@ -241,13 +194,9 @@ elephants%>%
 ```
 
 ```
-## `summarise()` ungrouping output (override with `.groups` argument)
-```
-
-```
 ## # A tibble: 2 x 5
 ##   sex   mean_height_25 min_height_25 max_height_25 total
-##   <fct>          <dbl>         <dbl>         <dbl> <int>
+## * <fct>          <dbl>         <dbl>         <dbl> <int>
 ## 1 M               273.          237.          304.     8
 ## 2 F               233.          206.          278.    25
 ```
@@ -259,19 +208,19 @@ Reference: Koerner SE, Poulsen JR, Blanchard EJ, Okouyi J, Clark CJ. Vertebrate 
 **9. (2 points) Load `IvindoData_DryadVersion.csv` and use the function(s) of your choice to get an idea of the overall structure. Change the variables `HuntCat` and `LandUse` to factors.**
 
 ```r
-setwd("D:/GitHub Database/Course BIS15L/BIS15W2021_wzhang/midterm 1/Data")
-verberate <- readr::read_csv("IvindoData_DryadVersion.csv")
+#setwd("D:/GitHub Database/Course BIS15L/BIS15W2021_wzhang/midterm 1/Data")
+verberate <- readr::read_csv("data/IvindoData_DryadVersion.csv")
 ```
 
 ```
 ## 
-## -- Column specification --------------------------------------------------------
+## ── Column specification ────────────────────────────────────────────────────────
 ## cols(
 ##   .default = col_double(),
 ##   HuntCat = col_character(),
 ##   LandUse = col_character()
 ## )
-## i Use `spec()` for the full column specifications.
+## ℹ Use `spec()` for the full column specifications.
 ```
 
 ```r
@@ -279,7 +228,7 @@ str(verberate)
 ```
 
 ```
-## tibble [24 x 26] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+## spec_tbl_df [24 × 26] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
 ##  $ TransectID             : num [1:24] 1 2 2 3 4 5 6 7 8 9 ...
 ##  $ Distance               : num [1:24] 7.14 17.31 18.32 20.85 15.95 ...
 ##  $ HuntCat                : chr [1:24] "Moderate" "None" "None" "None" ...
@@ -355,7 +304,6 @@ class(verberate$LandUse)
 ## [1] "factor"
 ```
 
-
 **10. (4 points) For the transects with high and moderate hunting intensity, how does the average diversity of birds and mammals compare?**
 
 The average diversities are higher in high hunting intensity transects.
@@ -370,17 +318,17 @@ verberate%>%
 ```
 
 ```
-## `summarise()` ungrouping output (override with `.groups` argument)
-```
-
-```
 ## # A tibble: 2 x 3
 ##   HuntCat  mean_birds mean_mammals
-##   <fct>         <dbl>        <dbl>
+## * <fct>         <dbl>        <dbl>
 ## 1 Moderate       1.62         1.68
 ## 2 High           1.66         1.74
 ```
 
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 **11. (4 points) One of the conclusions in the study is that the relative abundance of animals drops off the closer you get to a village. Let's try to reconstruct this (without the statistics). How does the relative abundance (RA) of apes, birds, elephants, monkeys, rodents, and ungulates compare between sites that are less than 5km from a village to sites that are greater than 20km from a village? The variable `Distance` measures the distance of the transect from the nearest village. Hint: try using the `across` operator.**  
 
 ```r
@@ -391,27 +339,26 @@ verberate%>%
 ```
 
 ```
-## `summarise()` ungrouping output (override with `.groups` argument)
-```
-
-```
 ## # A tibble: 6 x 8
 ##   Distance TransectID RA_Apes RA_Birds RA_Elephant RA_Monkeys RA_Rodent
-##      <dbl>      <dbl>   <dbl>    <dbl>       <dbl>      <dbl>     <dbl>
+## *    <dbl>      <dbl>   <dbl>    <dbl>       <dbl>      <dbl>     <dbl>
 ## 1     2.7          15    0        85.0       0.290       9.09      3.74
 ## 2     2.92         27    0.24     68.2       0          25.6       4.05
 ## 3     3.83         17    0        57.8       0          37.8       3.19
 ## 4    20.8           3   12.9      59.3       0.56       19.8       3.66
 ## 5    24.1           6    3.78     42.7       1.11       46.2       3.1 
 ## 6    26.8          24    4.91     31.6       0          54.1       1.29
-## # ... with 1 more variable: RA_Ungulate <dbl>
+## # … with 1 more variable: RA_Ungulate <dbl>
 ```
+_group_by() will not work here because the distances are unique._  
+
+</div>
 
 **12. (4 points) Based on your interest, do one exploratory analysis on the `gabon` data of your choice. This analysis needs to include a minimum of two functions in `dplyr.`**
 
-Whether the numbers of households in different transects have great impact on diversity and richness of all species.
+Whether the numbers of households in different transects have great impact on diversity and richness of all species.  
 
-The data shows that the numbers of households in different transects seems to have no great impact on diversity and richness of all species.
+The data shows that the numbers of households in different transects seems to have no great impact on diversity and richness of all species.  
 
 ```r
 verberate%>%
@@ -421,7 +368,7 @@ verberate%>%
 ```
 
 ```
-## `summarise()` regrouping output by 'TransectID' (override with `.groups` argument)
+## `summarise()` has grouped output by 'TransectID'. You can override using the `.groups` argument.
 ```
 
 ```
@@ -439,6 +386,7 @@ verberate%>%
 ##  8          2            29                 2.29              22
 ##  9          3            29                 2.01              19
 ## 10          4            29                 2.43              20
-## # ... with 14 more rows
+## # … with 14 more rows
 ```
 
+_Nice job Weidi! There are only a few problems, mostly related to the path issue I point out. Also, be sure to review the group_by() function_
