@@ -27,7 +27,7 @@ library(janitor)
 ## Install `here`
 The package `here` is a nice option for keeping directories clear when loading files. I will demonstrate below and let you decide if it is something you want to use.  
 ```{r}
-install.packages("here")
+#install.packages("here")
 ```
 
 ## Data
