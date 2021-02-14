@@ -1,7 +1,7 @@
 ---
 title: "Lab 9 Homework"
 author: "Weidi Zhang"
-date: "2021-02-10"
+date: "2021-02-14"
 output:
   html_document:
     keep_md: yes
@@ -89,55 +89,6 @@ glimpse(colleges)
 colleges <- janitor::clean_names(colleges)
 ```
 
-```
-## Warning in FUN(X[[i]], ...): strings not representable in native encoding will
-## be translated to UTF-8
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00C4>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00D6>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00E4>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00F6>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00DF>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00C6>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00E6>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00D8>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00F8>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00C5>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00E5>' to native encoding
-```
-
 
 ```r
 naniar::miss_var_summary(colleges)
@@ -172,10 +123,6 @@ colleges%>%
 ```
 
 ```
-## `summarise()` ungrouping output (override with `.groups` argument)
-```
-
-```
 ## # A tibble: 161 x 2
 ##    city          num_colleges
 ##    <chr>                <int>
@@ -204,10 +151,6 @@ colleges%>%
   geom_col()
 ```
 
-```
-## `summarise()` ungrouping output (override with `.groups` argument)
-```
-
 ![](lab9_hw_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
 
 4. The column `COSTT4_A` is the annual cost of each institution. Which city has the highest average cost? Where is it located?
@@ -220,10 +163,6 @@ colleges%>%
   group_by(city)%>%
   summarize(cost_city = mean(costt4_a, na.rm = T))%>%
   arrange(desc(cost_city))
-```
-
-```
-## `summarise()` ungrouping output (override with `.groups` argument)
 ```
 
 ```
