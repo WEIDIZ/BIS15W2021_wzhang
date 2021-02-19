@@ -1,7 +1,7 @@
 ---
 title: "Lab 10 Homework"
 author: "Weidi Zhang"
-date: "2021-02-12"
+date: "2021-02-18"
 output:
   html_document:
     keep_md: yes
@@ -218,6 +218,10 @@ deserts %>%
 ```
 
 ![](lab10_hw_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 
 6. Add another layer to your answer from #4 using `geom_point` to get an idea of how many measurements were taken for each species.
 
@@ -234,6 +238,7 @@ deserts %>%
 ```
 
 ![](lab10_hw_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
+</div>
 
 7. [Dipodomys merriami](https://en.wikipedia.org/wiki/Merriam's_kangaroo_rat) is the most frequently sampled animal in the study. How have the number of observations of this species changed over the years included in the study?
 
@@ -280,10 +285,6 @@ deserts%>%
   group_by(species)%>%
   summarize(mean_wight = mean(weight, na.rm = T))%>%
   arrange(desc(mean_wight))
-```
-
-```
-## `summarise()` ungrouping output (override with `.groups` argument)
 ```
 
 ```
