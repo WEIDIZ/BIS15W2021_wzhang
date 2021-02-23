@@ -1,7 +1,7 @@
 ---
 title: "Lab 11 Homework"
 author: "Weidi Zhang"
-date: "2021-02-16"
+date: "2021-02-17"
 output:
   html_document:
     keep_md: yes
@@ -46,58 +46,6 @@ It seems that there is no NA in the data.
 
 ```r
 gapminder <- clean_names(gapminder)
-```
-
-```
-## Warning in FUN(X[[i]], ...): strings not representable in native encoding will
-## be translated to UTF-8
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00C4>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00D6>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00E4>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00F6>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00DF>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00C6>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00E6>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00D8>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00F8>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00C5>' to native encoding
-```
-
-```
-## Warning in FUN(X[[i]], ...): unable to translate '<U+00E5>' to native encoding
-```
-
-```r
 names(gapminder)
 ```
 
@@ -160,10 +108,6 @@ gapminder %>%
        y = "Expectancy")
 ```
 
-```
-## `summarise()` ungrouping output (override with `.groups` argument)
-```
-
 ![](lab11_hw_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
 
 **3. How do the distributions of life expectancy compare for the years 1952 and 2007?**
@@ -212,7 +156,7 @@ gapminder %>%
 ```
 
 ```
-## `summarise()` regrouping output by 'year' (override with `.groups` argument)
+## `summarise()` has grouped output by 'year'. You can override using the `.groups` argument.
 ```
 
 ![](lab11_hw_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
@@ -281,10 +225,6 @@ gapminder%>%
   labs(title = "Top 5 countries of Population Growth",
        x = "country",
        y = "Population Growth")
-```
-
-```
-## `summarise()` ungrouping output (override with `.groups` argument)
 ```
 
 ![](lab11_hw_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
