@@ -1,0 +1,285 @@
+---
+title: "Midterm 2"
+author: "Weidi Zhang"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    keep_md: yes
+    theme: spacelab
+    toc: no
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Instructions
+Answer the following questions and complete the exercises in RMarkdown. Please embed all of your code and push your final work to your repository. Your code should be organized, clean, and run free from errors. Be sure to **add your name** to the author header above. You may use any resources to answer these questions (including each other), but you may not post questions to Open Stacks or external help sites. There are 10 total questions.  
+
+Make sure to use the formatting conventions of RMarkdown to make your report neat and clean! Your plots should use consistent aesthetics throughout. Feel free to be creative- there are many possible solutions to these questions!  
+
+This exam is due by **12:00p on Tuesday, February 23**.  
+
+## Load the libraries
+```{r}
+library(tidyverse)
+library(janitor)
+library(here)
+options(scipen=999) #disables scientific notation when printing
+```
+
+## Gapminder
+For this assignment, we are going to use data from  [gapminder](https://www.gapminder.org/). Gapminder includes information about economics, population, social issues, and life expectancy from countries all over the world. We will use three data sets, so please load all three.  
+
+One thing to note is that the data include years beyond 2021. These are projections based on modeling done by the gapminder organization. Start by importing the data.
+```{r}
+population <- read_csv(here("midterm2", "data", "population_total.csv"))
+population
+```
+
+```{r}
+income <- read_csv(here("midterm2","data", "income_per_person_gdppercapita_ppp_inflation_adjusted.csv"))
+income
+```
+
+```{r}
+life_expectancy <- read_csv(here("midterm2","data", "life_expectancy_years.csv"))
+life_expectancy
+```
+
+1. (3 points) Once you have an idea of the structure of the data, please make each data set tidy and store them as new objects. You will need both the original and tidy data!
+```{r}
+population_tidy <- population%>%
+  pivot_longer(-country,
+               names_to = "year",
+               values_to = "pop",
+               values_drop_na = TRUE)
+population_tidy
+```
+
+```{r}
+income_tidy <- income%>%
+  pivot_longer(-country,
+               names_to = "year",
+               values_to = "inc",
+               values_drop_na = TRUE)
+income_tidy
+```
+
+```{r}
+life_expectancy_tidy <- life_expectancy%>%
+  pivot_longer(-country,
+               names_to = "year",
+               values_to = "lifeExpectancy",
+               values_drop_na = TRUE)
+life_expectancy_tidy
+```
+
+2. (1 point) How many different countries are represented in the data? Provide the total number and their names. Since each data set includes different numbers of countries, you will need to do this for each one.
+
+Population
+```{r}
+population_tidy%>%
+  summarise(number = n_distinct(country))
+```
+
+```{r}
+population_tidy%>%
+  summarise(country)
+```
+
+Income
+```{r}
+income_tidy%>%
+  summarise(n_distinct(country))
+```
+```{r}
+income_tidy%>%
+  summarise(country)
+```
+
+Life Expextancy
+```{r}
+life_expectancy_tidy%>%
+  summarise(n_distinct(country))
+```
+```{r}
+life_expectancy%>%
+  summarise(country)
+```
+
+
+## Life Expectancy  
+
+3. (2 points) Let's limit the data to the past 100 years (1920-2020). For these years, which country has the highest life expectancy? How about the lowest life expectancy?  
+
+During 1920 to 2020, Singapore has the highest life expectancy; Kazakhstan has the lowest life expectancy.
+
+Highest
+```{r}
+life_expectancy_tidy%>%
+  filter(year >= 1920, year <= 2020)%>%
+  arrange(desc(lifeExpectancy))
+```
+
+Lowest
+```{r}
+life_expectancy_tidy%>%
+  filter(year >= 1920, year <= 2020)%>%
+  arrange(lifeExpectancy)
+```
+
+4. (3 points) Although we can see which country has the highest life expectancy for the past 100 years, we don't know which countries have changed the most. What are the top 5 countries that have experienced the biggest improvement in life expectancy between 1920-2020?
+
+They are Kuwait, Kyrgyz Republic, Turkmenistan, South Korea, and Tajikistan.
+```{r}
+life_expectancy_tidy%>%
+  group_by(country)%>%
+  filter(year == 1920 | year == 2020)%>%
+  mutate(life_expectancy_imp = diff(lifeExpectancy))%>%
+  arrange(desc(life_expectancy_imp))%>%
+  head(n = 10)
+```
+
+
+5. (3 points) Make a plot that shows the change over the past 100 years for the country with the biggest improvement in life expectancy. Be sure to add appropriate aesthetics to make the plot clean and clear. Once you have made the plot, do a little internet searching and see if you can discover what historical event may have contributed to this remarkable change.  
+
+Kuwait began the development of its petroleum industry in the 1930s. The industry is largely responsible for the country’s wealth and high standard of living today. It is likely also partly responsible for its high life expectancy. High socioeconomic status is a key determinant of high life expectancy.
+```{r}
+life_expectancy_tidy%>%
+  filter(country == "Kuwait", year >= 1920, year <= 2020)%>%
+  ggplot(aes(x = year,
+             y = lifeExpectancy))+
+  geom_line(group = 1)+
+   theme(plot.title = element_text(size=rel(1.5), hjust =0.5),
+        axis.text.x = element_text(size = 9, angle = 60, hjust = 1))+
+  labs(title = "Kuwait Life Expantancy from 1920 to 2020",
+       x = "year",
+       y = "Life Expantancy")+
+    scale_x_discrete(breaks = c("1920", "1925", "1930", "1935", "1940", "1945", "1950", "1955", "1960", "1965", "1970", "1975", "1980", "1985", "1990", "1995", "2000", "2005", "2010", "2015", "2020"))
+```
+
+## Population Growth
+6. (3 points) Which 5 countries have had the highest population growth over the past 100 years (1920-2020)?
+
+They are India, China, Indonesia, United States, and Pakistan.
+```{r}
+population_tidy%>%
+  group_by(country)%>%
+  filter(year == 1920 | year == 2020)%>%
+  mutate(population_imp = diff(pop))%>%
+  arrange(desc(population_imp))%>%
+  head(n = 10)
+```
+
+7. (4 points) Produce a plot that shows the 5 countries that have had the highest population growth over the past 100 years (1920-2020). Which countries appear to have had exponential growth?  
+
+China and India appear to have had exponential growth.
+```{r}
+population_tidy%>%
+  filter(country == "India"| country == "China"| country == "Indonesia"| country == "United States" | country == "Pakistan")%>%
+  filter( year >= 1920 & year <= 2020)%>%
+  group_by(year, country)%>%
+  ggplot(aes(x = year,
+             y = pop,
+             group = country,
+             color = country))+
+  geom_line()+
+   theme(plot.title = element_text(size=rel(1.5), hjust =0.5),
+        axis.text.x = element_text(size = 9, angle = 60, hjust = 1))+
+  labs(title = "Top 5 counties of Population Growth  from 1920 to 2020",
+       x = "year",
+       y = "Population")+
+    scale_x_discrete(breaks = c("1920", "1925", "1930", "1935", "1940", "1945", "1950", "1955", "1960", "1965", "1970", "1975", "1980", "1985", "1990", "1995", "2000", "2005", "2010", "2015", "2020"))
+```
+
+## Income
+The units used for income are gross domestic product per person adjusted for differences in purchasing power in international dollars.
+
+8. (4 points) As in the previous questions, which countries have experienced the biggest growth in per person GDP. Show this as a table and then plot the changes for the top 5 countries. With a bit of research, you should be able to explain the dramatic downturns of the wealthiest economies that occurred during the 1980's.
+
+The crash of oil prices in the 1980s caused dramatic downturns of GDP in Brunei and Qatar.
+```{r}
+income_tidy%>%
+  group_by(country)%>%
+  filter(year == 1920 | year == 2020)%>%
+  mutate(income_imp = diff(inc))%>%
+  arrange(desc(income_imp))%>%
+  head(n = 10)
+```
+```{r}
+income_tidy%>%
+  filter(country == "Qatar"| country == "Luxembourg"| country == "Singapore"| country == "Brunei" | country == "Ireland")%>%
+  filter( year >= 1920 & year <= 2020)%>%
+  group_by(year, country)%>%
+  ggplot(aes(x = year,
+             y = inc,
+             group = country,
+             color = country))+
+  geom_line()+
+   theme(plot.title = element_text(size=rel(1.5), hjust =0.5),
+        axis.text.x = element_text(size = 9, angle = 60, hjust = 1))+
+  labs(title = "Top 5 counties of Per Person GDP Growth  from 1920 to 2020",
+       x = "year",
+       y = "GDP")+
+    scale_x_discrete(breaks = c("1920", "1925", "1930", "1935", "1940", "1945", "1950", "1955", "1960", "1965", "1970", "1975", "1980", "1985", "1990", "1995", "2000", "2005", "2010", "2015", "2020"))
+```
+
+
+9. (3 points) Create three new objects that restrict each data set (life expectancy, population, income) to the years 1920-2020. Hint: I suggest doing this with the long form of your data. Once this is done, merge all three data sets using the code I provide below. You may need to adjust the code depending on how you have named your objects. I called mine `life_expectancy_100`, `population_100`, and `income_100`. For some of you, learning these `joins` will be important for your project.  
+
+life_expectancy_100
+```{r}
+life_expectancy_100 <- life_expectancy_tidy%>%
+  filter(year >= 1920 & year <= 2020)
+```
+
+population_100
+```{r}
+population_100 <- population_tidy%>%
+   filter(year >= 1920 & year <= 2020)
+```
+
+income_100
+```{r}
+income_100 <- income_tidy%>%
+  filter(year >= 1920 & year <= 2020)
+```
+
+```{r}
+gapminder_join <- inner_join(life_expectancy_100, population_100, by= c("country", "year"))
+gapminder_join <- inner_join(gapminder_join, income_100, by= c("country", "year"))
+gapminder_join
+```
+
+10. (4 points) Use the joined data to perform an analysis of your choice. The analysis should include a comparison between two or more of the variables `life_expectancy`, `population`, or `income.`
+```{r}
+gapminder_join%>%
+  filter(year == 2020)%>%
+  arrange(desc(pop))%>%
+  head(n = 5)
+```
+```{r}
+gapminder_join <-
+  mutate(gapminder_join, life_inc_ratio = lifeExpectancy/inc)
+```
+
+
+```{r}
+gapminder_join%>%
+  filter(country == "China"| country == "India"| country == "United States"| country == "Indonesia" | country == "Pakistan")%>%
+  filter( year >= 1920 & year <= 2020)%>%
+  group_by(year, country)%>%
+  ggplot(aes(x = year,
+             y = life_inc_ratio,
+             group = country,
+             color = country))+
+  geom_line()+
+   theme(plot.title = element_text(size=rel(1.5), hjust =0.5),
+        axis.text.x = element_text(size = 9, angle = 60, hjust = 1))+
+  labs(title = "The Ratio of Life Expactancy and Income from 1920 to 2020",
+       x = "year",
+       y = "Life Expactancy  Divide Income")+
+    scale_x_discrete(breaks = c("1920", "1925", "1930", "1935", "1940", "1945", "1950", "1955", "1960", "1965", "1970", "1975", "1980", "1985", "1990", "1995", "2000", "2005", "2010", "2015", "2020"))
+```
+
